@@ -1,6 +1,6 @@
 <?php
 // Pull in the configuration parameters
-require_once "./_config.php"; // Now we can access the $CONFIG params
+require_once "./credimax/_config.php"; // Now we can access the $CONFIG params
 
 // Get the amount (if set)
 $amount = @$_REQUEST['amount']; // in BHD
