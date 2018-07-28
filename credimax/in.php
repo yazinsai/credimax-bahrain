@@ -4,11 +4,9 @@
  * necessary duties (saving the entire response, processing for successful/failed
  * transactions) and then redirects to the 'done.php' page for display to the user.
  */
+require_once "./_config.php";
 ?>
 <?php
-// The secure hash for decrypting the returned data
-$SECURE_SECRET = "0961EEB23364DD6B4850A9EADA1C2038";
-
 // Retrieve the results from the Credimax page
 unset($_GET["vpc_SecureHash"]);
 
@@ -39,8 +37,7 @@ $_3dsxid                  = @$_GET["vpc_3DSXID"];
 $_3dseci                  = @$_GET["vpc_3DSECI"];
 $_3dsstatus               = @$_GET["vpc_3DSstatus"];
 
-// Store the results
-
+// Store the results in your Database
 
 // Redirect to the relevant page
 if($success) {

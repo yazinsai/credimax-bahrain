@@ -1,4 +1,5 @@
 <?php
+require_once("./_config.php");
 /* -----------------------------------------------------------------------------
 
  Version 2.0
@@ -58,36 +59,36 @@ Following is a copy of the disclaimer / license agreement provided by RSA:
 Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991. All rights reserved.
 
 License to copy and use this software is granted provided that it is identified
-as the "RSA Data Security, Inc. MD5 Message-Digest Algorithm" in all material 
+as the "RSA Data Security, Inc. MD5 Message-Digest Algorithm" in all material
 mentioning or referencing this software or this function.
 
-License is also granted to make and use derivative works provided that such 
-works are identified as "derived from the RSA Data Security, Inc. MD5 
-Message-Digest Algorithm" in all material mentioning or referencing the 
+License is also granted to make and use derivative works provided that such
+works are identified as "derived from the RSA Data Security, Inc. MD5
+Message-Digest Algorithm" in all material mentioning or referencing the
 derived work.
 
-RSA Data Security, Inc. makes no representations concerning either the 
-merchantability of this software or the suitability of this software for any 
-particular purpose. It is provided "as is" without express or implied warranty 
+RSA Data Security, Inc. makes no representations concerning either the
+merchantability of this software or the suitability of this software for any
+particular purpose. It is provided "as is" without express or implied warranty
 of any kind.
 
-These notices must be retained in any copies of any part of this documentation 
+These notices must be retained in any copies of any part of this documentation
 and/or software.
 
--------------------------------------------------------------------------------- 
- 
+--------------------------------------------------------------------------------
+
 This example assumes that a form has been sent to this example with the
 required fields. The example then processes the command and displays the
 receipt or error to a HTML page in the users web browser.
 
 NOTE:
 =====
-  You may have installed the libeay32.dll and ssleay32.dll libraries 
+  You may have installed the libeay32.dll and ssleay32.dll libraries
   into your x:\WINNT\system32 directory to run this example.
 
 --------------------------------------------------------------------------------
 
- @author Dialect Payment Solutions Pty Ltd Group 
+ @author Dialect Payment Solutions Pty Ltd Group
 
 ------------------------------------------------------------------------------*/
 
@@ -101,17 +102,17 @@ NOTE:
 // This secret will vary from merchant to merchant
 // To not create a secure hash, let SECURE_SECRET be an empty string - ""
 // $SECURE_SECRET = "secure-hash-secret";
-$SECURE_SECRET = "0961EEB23364DD6B4850A9EADA1C2038";
+$SECURE_SECRET = $CONFIG['secure_secret'];
 
 // add the start of the vpcURL querystring parameters
 $vpcURL = $_GET["virtualPaymentClientURL"] . "?"; // MODIFIED :) from POST to GET
 
-// Remove the Virtual Payment Client URL from the parameter hash as we 
+// Remove the Virtual Payment Client URL from the parameter hash as we
 // do not want to send these fields to the Virtual Payment Client.
 unset($_GET["virtualPaymentClientURL"]); // MODIFIED :) from POST to GET
 
 // The URL link for the receipt to do another transaction.
-// Note: This is ONLY used for this example and is not required for 
+// Note: This is ONLY used for this example and is not required for
 // production code. You would hard code your own URL into your application.
 
 // Get and URL Encode the AgainLink. Add the AgainLink to the array
@@ -132,7 +133,7 @@ foreach($_GET as $key => $value) { // MODIFIED :) from POST to GET
 
     // create the md5 input and URL leaving out any fields that have no value
     if (strlen($value) > 0) {
-        
+
         // this ensures the first paramter of the URL is preceded by the '?' char
         if ($appendAmp == 0) {
             $vpcURL .= urlencode($key) . '=' . urlencode($value);
